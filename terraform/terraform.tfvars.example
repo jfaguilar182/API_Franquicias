@@ -1,0 +1,4 @@
+atlas_public_key  = "tu-public-key"
+atlas_private_key = "tu-private-key"
+atlas_org_id      = "tu-org-id"
+db_password       = "una-clave-segura"

@@ -1,0 +1,28 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: franquicias-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: franquicias-api
+    ports:
+      - "8080:8080"
+    environment:
+      # Para usar MongoDB Atlas, reemplaza este valor por tu cadena mongodb+srv://...
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/franquicias}
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  mongo-data:

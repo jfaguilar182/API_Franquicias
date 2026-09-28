@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: franquicias-api
+  data:
+    mongodb:
+      # Local: mongodb://localhost:27017/franquicias
+      # Nube (MongoDB Atlas): mongodb+srv://<usuario>:<clave>@<cluster>.mongodb.net/franquicias
+      uri: ${MONGODB_URI:mongodb://localhost:27017/franquicias}
+      auto-index-creation: true
+
+server:
+  port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
